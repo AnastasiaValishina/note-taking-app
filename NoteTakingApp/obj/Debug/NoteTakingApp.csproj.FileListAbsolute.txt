@@ -8,3 +8,4 @@ D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.csproj.Gen
 D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.csproj.CoreCompileInputs.cache
 D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.exe
 D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.pdb
+D:\Repositories\note-taking-app\NoteTakingApp\bin\Debug\NotesDataBase.db
