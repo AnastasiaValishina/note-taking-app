@@ -25,7 +25,7 @@ namespace NoteTakingApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-
+                cnn.Execute("insert into Note(Title, NoteText) values (@Title, @NoteText)", note);
             }
         }
         private static string LoadConnectionString(string id = "Default")

@@ -25,6 +25,8 @@ namespace NoteTakingApp
             notes.Columns.Add("Title");
             notes.Columns.Add("Note");
 
+        
+
             previousNotes.DataSource = notes;
         }
 
