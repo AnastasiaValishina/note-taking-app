@@ -9,3 +9,8 @@ D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.csproj.Cor
 D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.exe
 D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.pdb
 D:\Repositories\note-taking-app\NoteTakingApp\bin\Debug\NotesDataBase.db
+D:\Repositories\note-taking-app\NoteTakingApp\bin\Debug\Dapper.dll
+D:\Repositories\note-taking-app\NoteTakingApp\bin\Debug\System.Data.SQLite.dll
+D:\Repositories\note-taking-app\NoteTakingApp\bin\Debug\Dapper.xml
+D:\Repositories\note-taking-app\NoteTakingApp\bin\Debug\System.Data.SQLite.xml
+D:\Repositories\note-taking-app\NoteTakingApp\obj\Debug\NoteTakingApp.csproj.CopyComplete
