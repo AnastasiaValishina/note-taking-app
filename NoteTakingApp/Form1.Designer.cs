@@ -32,12 +32,11 @@
             this.noteBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.previousNotes = new System.Windows.Forms.DataGridView();
             this.loadButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.newNoteButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.previousNotes)).BeginInit();
+            this.previousNotesList = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // titleBox
@@ -75,19 +74,6 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Note:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // previousNotes
-            // 
-            this.previousNotes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.previousNotes.BackgroundColor = System.Drawing.SystemColors.Info;
-            this.previousNotes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.previousNotes.Location = new System.Drawing.Point(12, 8);
-            this.previousNotes.Name = "previousNotes";
-            this.previousNotes.RowHeadersWidth = 51;
-            this.previousNotes.RowTemplate.Height = 24;
-            this.previousNotes.Size = new System.Drawing.Size(390, 299);
-            this.previousNotes.TabIndex = 4;
-            this.previousNotes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.previousNotes_CellDoubleClick);
             // 
             // loadButton
             // 
@@ -137,17 +123,27 @@
             this.newNoteButton.UseVisualStyleBackColor = false;
             this.newNoteButton.Click += new System.EventHandler(this.newNoteButton_Click);
             // 
+            // previousNotesList
+            // 
+            this.previousNotesList.FormattingEnabled = true;
+            this.previousNotesList.ItemHeight = 16;
+            this.previousNotesList.Location = new System.Drawing.Point(12, 18);
+            this.previousNotesList.Name = "previousNotesList";
+            this.previousNotesList.Size = new System.Drawing.Size(391, 276);
+            this.previousNotesList.TabIndex = 10;
+            this.previousNotesList.DoubleClick += new System.EventHandler(this.doubleClick);
+            // 
             // NoteTaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSalmon;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.previousNotesList);
             this.Controls.Add(this.newNoteButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.deleteButton);
             this.Controls.Add(this.loadButton);
-            this.Controls.Add(this.previousNotes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.noteBox);
@@ -155,7 +151,6 @@
             this.Name = "NoteTaker";
             this.Text = "NoteTaker";
             this.Load += new System.EventHandler(this.NoteTaker_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.previousNotes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,11 +162,11 @@
         private System.Windows.Forms.TextBox noteBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView previousNotes;
         private System.Windows.Forms.Button loadButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button saveButton;
         private System.Windows.Forms.Button newNoteButton;
+        private System.Windows.Forms.ListBox previousNotesList;
     }
 }
 
