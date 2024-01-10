@@ -13,7 +13,6 @@ namespace NoteTakingApp
     public partial class NoteTaker : Form
     {
         List<Note> notesList = new List<Note>();
-        //DataTable notes = new DataTable();
         bool isEditing = false;
         BindingSource bindingSource = new BindingSource();
 
@@ -33,9 +32,6 @@ namespace NoteTakingApp
 
         private void ResetListBindings()
         {
-            //previousNotesList.DataSource = null;
-            //previousNotesList.DataSource = notesList;
-            
             previousNotesList.DataSource = bindingSource;
             previousNotesList.DisplayMember = "Title";
             bindingSource.ResetBindings(true);
@@ -67,10 +63,9 @@ namespace NoteTakingApp
         {
             if (isEditing)
             {
-                notesList.Add(new Note(titleBox.Text, noteBox.Text));
-
-                //notes.Rows[previousNotes.CurrentCell.RowIndex]["Title"] = titleBox.Text;
-                //notes.Rows[previousNotes.CurrentCell.RowIndex]["Note"] = noteBox.Text;
+                Note note = (Note)previousNotesList.SelectedItem;
+                note.Title = titleBox.Text;
+                note.NoteText = noteBox.Text;
             }
             else
             {
@@ -83,8 +78,9 @@ namespace NoteTakingApp
         }
         private void loadButton_Click(object sender, EventArgs e)
         {
-            //titleBox.Text = notes.Rows[previousNotes.CurrentCell.RowIndex].ItemArray[0].ToString();
-            //noteBox.Text = notes.Rows[previousNotes.CurrentCell.RowIndex].ItemArray[1].ToString();
+            Note note = (Note)previousNotesList.SelectedItem;
+            titleBox.Text = note.Title;
+            noteBox.Text = note.NoteText;
             isEditing = true;
         }
 
