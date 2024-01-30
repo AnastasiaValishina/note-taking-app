@@ -1,12 +1,9 @@
 ﻿using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoteTakingApp
 {
@@ -16,7 +13,7 @@ namespace NoteTakingApp
         {
             using(IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                var output = cnn.Query<Note>("select * from Note", new DynamicParameters());
+                var output = cnn.Query<Note>("select * from Notes", new DynamicParameters());
                 return output.ToList();
             }
         }
@@ -25,9 +22,18 @@ namespace NoteTakingApp
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("insert into Note(Title, NoteText) values (@Title, @NoteText)", note);
+                cnn.Execute("insert into Notes(Title, NoteText) values (@Title, @NoteText)", note);
             }
         }
+        
+        public static void DeleteNote(int id)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("DELETE FROM Notes WHERE Id = @Id", new { Id = id });
+            }
+        }
+
         private static string LoadConnectionString(string id = "Default")
         {
             return ConfigurationManager.ConnectionStrings[id].ConnectionString;

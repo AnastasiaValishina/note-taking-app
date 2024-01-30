@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NoteTakingApp
@@ -24,14 +19,19 @@ namespace NoteTakingApp
 
         private void NoteTaker_Load(object sender, EventArgs e)
         {
-            notesList.Add(new Note("one", "hi"));
-            notesList.Add(new Note("second note", "1 2 3 4 5"));
+            LoadNotes();
+        }
 
+        private void LoadNotes()
+        {
+            notesList.Clear();
+            notesList.AddRange(SqliteDataAccess.LoadNotes());
             ResetListBindings();
         }
 
         private void ResetListBindings()
         {
+            previousNotesList.DataSource = null;
             previousNotesList.DataSource = bindingSource;
             previousNotesList.DisplayMember = "Title";
             bindingSource.ResetBindings(true);
@@ -52,11 +52,22 @@ namespace NoteTakingApp
         {
             try
             {
-                var toDelete = previousNotesList.SelectedItem;
-                notesList.Remove((Note)toDelete);
-                ResetListBindings();
+                var toDelete = (Note)previousNotesList.SelectedItem;
+                if (toDelete != null)
+                {
+                    SqliteDataAccess.DeleteNote(toDelete.Id);
+                    notesList.Remove((Note)toDelete);
+                    ResetListBindings();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a note to delete.");
+                }
             }
-            catch(Exception ex) { Console.WriteLine("Not a valid note."); }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting note: {ex.Message}");
+            }
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -69,7 +80,7 @@ namespace NoteTakingApp
             }
             else
             {
-                notesList.Add(new Note(titleBox.Text, noteBox.Text));
+                SqliteDataAccess.SaveNote(new Note(titleBox.Text, noteBox.Text));
             }
             titleBox.Text = "";
             noteBox.Text = "";

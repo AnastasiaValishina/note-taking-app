@@ -11,5 +11,6 @@
             Title = title;
             NoteText = note;
         }
+        public Note() { }
     }
 }
