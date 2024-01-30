@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.ObjectModel;
 using System.Windows.Forms;
 
 namespace NoteTakingApp
 {
     public partial class NoteTaker : Form
     {
-        List<Note> notesList = new List<Note>();
+        ObservableCollection<Note> notesList = new ObservableCollection<Note>();
         bool isEditing = false;
         BindingSource bindingSource = new BindingSource();
 
@@ -25,7 +24,12 @@ namespace NoteTakingApp
         private void LoadNotes()
         {
             notesList.Clear();
-            notesList.AddRange(SqliteDataAccess.LoadNotes());
+            ObservableCollection<Note> newNotes = new ObservableCollection<Note>(SqliteDataAccess.LoadNotes());
+            foreach (var note in newNotes)
+            {
+                notesList.Add(note);
+            }
+
             ResetListBindings();
         }
 
@@ -34,7 +38,6 @@ namespace NoteTakingApp
             previousNotesList.DataSource = null;
             previousNotesList.DataSource = bindingSource;
             previousNotesList.DisplayMember = "Title";
-            bindingSource.ResetBindings(true);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -56,7 +59,7 @@ namespace NoteTakingApp
                 if (toDelete != null)
                 {
                     SqliteDataAccess.DeleteNote(toDelete.Id);
-                    notesList.Remove((Note)toDelete);
+                    notesList.Remove(toDelete);
                     ResetListBindings();
                 }
                 else
@@ -80,13 +83,16 @@ namespace NoteTakingApp
             }
             else
             {
-                SqliteDataAccess.SaveNote(new Note(titleBox.Text, noteBox.Text));
+                var newNote = new Note(titleBox.Text, noteBox.Text);
+                SqliteDataAccess.SaveNote(newNote);
+                notesList.Add(newNote);
             }
             titleBox.Text = "";
             noteBox.Text = "";
             isEditing = false;
             ResetListBindings();
         }
+
         private void loadButton_Click(object sender, EventArgs e)
         {
             Note note = (Note)previousNotesList.SelectedItem;

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.Data.SQLite;
@@ -9,12 +10,12 @@ namespace NoteTakingApp
 {
     public class SqliteDataAccess
     {
-        public static List<Note> LoadNotes()
+        public static ObservableCollection<Note> LoadNotes()
         {
             using(IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
                 var output = cnn.Query<Note>("select * from Notes", new DynamicParameters());
-                return output.ToList();
+                return new ObservableCollection<Note>(output);
             }
         }
 
